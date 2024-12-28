@@ -36,7 +36,7 @@ export default function SenderPage() {
     }, []);
 
     useEffect(() => {
-        const ws = new WebSocket("ws://localhost:8080");
+        const ws = new WebSocket("ws://" + process.env.WS_SERVER);
         ws.binaryType = "arraybuffer"; // Add this line
         setWsConnection(ws);
 

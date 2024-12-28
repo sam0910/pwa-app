@@ -57,7 +57,7 @@ export default function ReceiverClient() {
     const connectWebSocket = () => {
         try {
             console.log("Connecting to WebSocket server...");
-            const ws = new WebSocket("ws://172.30.1.48:8080");
+            const ws = new WebSocket("ws://" + process.env.WS_SERVER);
             ws.binaryType = "arraybuffer";
             wsRef.current = ws;
 
