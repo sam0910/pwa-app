@@ -8,11 +8,15 @@ importers:
 
   .:
     dependencies:
+      os: {specifier: ^0.1.2, version: 0.1.2}
       ws:
         specifier: ^8.18.0
         version: 8.18.0
 
 packages:
+
+  os@0.1.2:
+    resolution: {integrity: sha512-ZoXJkvAnljwvc56MbvhtKVWmSkzV712k42Is2mA0+0KTSRakq5XXuXpjZjgAt9ctzl51ojhQWakQQpmOvXWfjQ==}
 
   ws@8.18.0:
     resolution: {integrity: sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==}
@@ -27,5 +31,7 @@ packages:
         optional: true
 
 snapshots:
+
+  os@0.1.2: {}
 
   ws@8.18.0: {}

@@ -1,4 +1,19 @@
 import { WebSocketServer } from "ws";
+import os from "os";
+
+function getLocalIP() {
+    const interfaces = os.networkInterfaces();
+    for (let iface of Object.values(interfaces)) {
+        for (let addr of iface) {
+            if (addr.family === "IPv4" && !addr.internal) {
+                return addr.address;
+            }
+        }
+    }
+    return "127.0.0.1"; // Fallback to localhost
+}
+
+const IP = getLocalIP();
 
 const wss = new WebSocketServer({
     port: 8080,
@@ -58,5 +73,5 @@ const interval = setInterval(() => {
 wss.on("close", () => {
     clearInterval(interval);
 });
-
-console.log("WebSocket server started on port 8080");
+//
+console.log(`WebSocket server started on port http://${IP}:8080`);
