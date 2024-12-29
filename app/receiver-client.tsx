@@ -7,7 +7,7 @@ export default function ReceiverClient() {
     const [error, setError] = useState<string | null>(null);
     const audioContextRef = useRef<AudioContext | null>(null);
     const wsRef = useRef<WebSocket | null>(null);
-    const sourceNodeRef = useRef<MediaStreamAudioSourceNode | null>(null);
+    // const sourceNodeRef = useRef<MediaStreamAudioSourceNode | null>(null);
     const [isMounted, setIsMounted] = useState(false);
     const reconnectTimeoutRef = useRef<NodeJS.Timeout>();
     const reconnectAttemptsRef = useRef(0);
