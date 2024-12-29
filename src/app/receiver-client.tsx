@@ -8,7 +8,6 @@ export default function ReceiverClient() {
     const audioContextRef = useRef<AudioContext | null>(null);
     const wsRef = useRef<WebSocket | null>(null);
     const sourceNodeRef = useRef<MediaStreamAudioSourceNode | null>(null);
-    const [isMounted, setIsMounted] = useState(false);
     const reconnectTimeoutRef = useRef<NodeJS.Timeout>();
     const reconnectAttemptsRef = useRef(0);
     const MAX_RECONNECT_ATTEMPTS = 5;
@@ -16,10 +15,6 @@ export default function ReceiverClient() {
     const connectionRef = useRef<any>(null);
     const [networkType, setNetworkType] = useState<string | null>(null);
     const [manuallyDisconnected, setManuallyDisconnected] = useState(false);
-
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
 
     useEffect(() => {
         if (typeof navigator !== "undefined" && "connection" in navigator) {
@@ -46,7 +41,7 @@ export default function ReceiverClient() {
     }, []);
 
     useEffect(() => {
-        if (!isMounted || !isAudioInitialized) return;
+        if (!isAudioInitialized) return;
 
         console.log("Starting WebSocket connection with audio initialized");
         const ws = connectWebSocket();
@@ -57,7 +52,7 @@ export default function ReceiverClient() {
             }
             wsRef.current?.close();
         };
-    }, [isMounted, isAudioInitialized]); // Add isAudioInitialized as dependency
+    }, [isAudioInitialized]); // Add isAudioInitialized as dependency
 
     // Add effect to monitor manuallyDisconnected changes
     useEffect(() => {
@@ -200,15 +195,6 @@ export default function ReceiverClient() {
         reconnectAttemptsRef.current = 0;
         connectWebSocket();
     };
-
-    if (!isMounted) {
-        return (
-            <div className="min-h-screen flex flex-col items-center justify-center gap-4">
-                <h1 className="text-2xl font-bold mb-4">Audio Receiver</h1>
-                <div className="text-sm text-gray-600">Initializing...</div>
-            </div>
-        );
-    }
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center gap-4">
